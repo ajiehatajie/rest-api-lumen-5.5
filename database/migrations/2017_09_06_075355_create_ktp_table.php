@@ -24,6 +24,7 @@ class CreateKtpTable extends Migration
             $table->increments('id');
             $table->string('nik')->unique();
             $table->integer('kecamatan_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->text('notes');
             $table->boolean('status')->default(0);
             $table->timestamps();

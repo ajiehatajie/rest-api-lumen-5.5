@@ -14,7 +14,8 @@
 $router->group(['prefix' => 'api/'], function ($router) {
    
     $router->get('/key', function() {
-        return str_random(32);
+        $key= \Auth::user()->id;
+        return $key;
     });
     $router->get('/user/{id}', ['uses'=>'UsersController@get_user','middleware'=>'auth']);
     

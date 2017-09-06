@@ -20,14 +20,15 @@ class KtpController extends Controller
     {   
         $this->validate($request, [
             'nik' => 'required|unique:ktps',
-            'kecamatan_id' => 'required'
+            'kecamatan' => 'required'
         ]);
 
         
         $createData = Ktp::create([
             'nik'           => $request->input('nik'),
             'kecamatan_id'  => $request->input('kecamatan'),
-            'notes'         => $request->input('notes')
+            'notes'         => $request->input('notes'),
+            'user_id'       => \Auth::user()->id
         ]);
 
         if ($createData) {

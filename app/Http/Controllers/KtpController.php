@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
@@ -12,18 +12,23 @@ class KtpController extends Controller
     {
         $data = Ktp::paginate(20);
 
-        return $this->listResponse($data); 
-        
+        return $this->listResponse($data);
+
     }
 
+    public function KtpCreated(){
+        $data   = Ktp::where('id',1)->with('Kecamatan')->get();
+
+        return $this->listResponse($data);
+    }
     public function create(Request $request)
-    {   
+    {
         $this->validate($request, [
             'nik' => 'required|unique:ktps',
             'kecamatan' => 'required'
         ]);
 
-        
+
         $createData = Ktp::create([
             'nik'           => $request->input('nik'),
             'kecamatan_id'  => $request->input('kecamatan'),
@@ -40,28 +45,32 @@ class KtpController extends Controller
 
     }
 
-    public function show($id) 
+    public function show($id)
     {
-            $data = Ktp::find($id);
-
+            $data = Ktp::where('id',$id)->with('user');
             if($data) {
-                return $this->showResponse($data);
-                
-            }
-            return $this->notFoundResponse();
-    }   
+               $result= $data->with('kecamatan')->get();
+               $jumlah = count($result);
 
-    public function destroy($id) 
+               if($jumlah > 0) {
+                 return $this->showResponse($result);
+               }
+                 return $this->notFoundResponse();
+            }
+
+    }
+
+    public function destroy($id)
     {
             $data = Ktp::find($id);
 
             if($data) {
                 $data->delete();
                 return $this->deletedResponse();
-                
+
             }
             return $this->notFoundResponse();
-    }   
+    }
 
     protected function showResponse($data)
     {
@@ -126,4 +135,3 @@ class KtpController extends Controller
         return response()->json($response, $response['code']);
     }
 }
-

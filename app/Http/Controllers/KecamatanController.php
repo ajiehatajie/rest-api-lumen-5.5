@@ -14,6 +14,12 @@ class KecamatanController extends Controller
         return $this->listResponse($data);
     }
 
+    public function ktp($id)
+    {
+        $data = Kecamatan::where('id',$id)->with('ktp')->get();
+        return $this->listResponse($data);
+    }
+
     public function create(Request $request)
     {
         $this->validate($request, [

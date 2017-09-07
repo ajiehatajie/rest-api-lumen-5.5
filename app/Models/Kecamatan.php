@@ -10,4 +10,9 @@ class Kecamatan extends Model
     protected $fillable = [
         'name'
     ];
+
+
+    public function ktp(){
+        return $this->hasMany('App\Models\Ktp');        
+    }
 }

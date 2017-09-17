@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ktp;
-use App\Model\Kecamatan;
+use App\Models\Kecamatan;
 use Illuminate\Http\Request;
 
 class KtpController extends Controller
@@ -49,10 +49,16 @@ class KtpController extends Controller
     }
 
     public function show($kecamatan,$date)
-    {   
+    {
+            $id = kecamatan::where('name',urldecode($kecamatan))->first();
+            //dd($id->id);
+
+            //dd($id);
             //$kecamatan
-            $data = Ktp::where('kecamatan_id',$kecamatan)
-                    ->where('date_submission',$date)->with('user');
+            $data = Ktp::where('kecamatan_id',$id->id)
+                    ->where('date_submission',$date)
+                    ->with('user');
+
             if($data) {
                $result= $data->with('kecamatan')->get();
                $jumlah = count($result);

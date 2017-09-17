@@ -29,7 +29,7 @@ class CreateKtpTable extends Migration
             $table->integer('total');
             $table->text('notes_create');
             $table->text('notes_update');
-            $table->timestamp('date_submission')->unique();//pengajuan buat nya
+            $table->date('date_submission')->unique();//pengajuan buat nya
             $table->boolean('status')->default(0);
             $table->timestamps();
             $table->index('date_submission','kecamatan_id');

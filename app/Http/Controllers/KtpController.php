@@ -34,7 +34,7 @@ class KtpController extends Controller
             'kecamatan_id'  => $request->input('kecamatan'),
             'notes'         => $request->input('notes'),
             'submission'    => $request->input('submission'),
-            'user_id'       => \Auth::user()->id
+            'user_id'       => \Auth::user()->id,
         ]);
 
         if ($createData) {

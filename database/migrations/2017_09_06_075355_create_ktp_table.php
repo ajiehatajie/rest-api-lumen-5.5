@@ -14,6 +14,7 @@ class CreateKtpTable extends Migration
     public function up()
     {
         Schema::create('kecamatans', function (Blueprint $table) {
+            $table->engine = 'MyISAM';
             $table->increments('id');
             $table->string('name')->unique();
             $table->timestamps();
@@ -21,17 +22,20 @@ class CreateKtpTable extends Migration
         });
 
         Schema::create('ktps', function (Blueprint $table) {
+            $table->engine = 'MyISAM';
             $table->increments('id');
             $table->string('nik')->unique();
             $table->integer('kecamatan_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->text('notes');
+            $table->timestamp('submission');//pengajuan buat nya
             $table->boolean('status')->default(0);
             $table->timestamps();
             $table->index('nik','created_at');
         });
 
         Schema::create('users', function (Blueprint $table) {
+            //$table->engine = 'MyISAM';
             $table->increments('id');
             $table->string('email')->unique();
             $table->integer('kecamatan_id')->unsigned();

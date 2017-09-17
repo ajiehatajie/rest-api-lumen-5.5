@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ktp extends Model
 {
     protected $fillable = [
-        'nik','notes','kecamatan_id','user_id'
+        'nik','notes','kecamatan_id','user_id','submission'
     ];
 
 
@@ -16,6 +16,6 @@ class Ktp extends Model
     }
 
     public function user(){
-        return $this->belongsTo('App\User');        
+        return $this->belongsTo('App\User');
     }
 }

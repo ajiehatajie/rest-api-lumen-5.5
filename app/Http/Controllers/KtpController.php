@@ -33,6 +33,7 @@ class KtpController extends Controller
             'nik'           => $request->input('nik'),
             'kecamatan_id'  => $request->input('kecamatan'),
             'notes'         => $request->input('notes'),
+            'submission'    => $request->input('submission'),
             'user_id'       => \Auth::user()->id
         ]);
 
@@ -45,9 +46,9 @@ class KtpController extends Controller
 
     }
 
-    public function show($id)
+    public function show($nik)
     {
-            $data = Ktp::where('id',$id)->with('user');
+            $data = Ktp::where('nik',$nik)->with('user');
             if($data) {
                $result= $data->with('kecamatan')->get();
                $jumlah = count($result);

@@ -24,14 +24,15 @@ class CreateKtpTable extends Migration
         Schema::create('ktps', function (Blueprint $table) {
             $table->engine = 'MyISAM';
             $table->increments('id');
-            $table->string('nik')->unique();
             $table->integer('kecamatan_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->text('notes');
-            $table->timestamp('submission');//pengajuan buat nya
+            $table->integer('total');
+            $table->text('notes_create');
+            $table->text('notes_update');
+            $table->timestamp('date_submission')->unique();//pengajuan buat nya
             $table->boolean('status')->default(0);
             $table->timestamps();
-            $table->index('nik','created_at');
+            $table->index('date_submission','kecamatan_id');
         });
 
         Schema::create('users', function (Blueprint $table) {

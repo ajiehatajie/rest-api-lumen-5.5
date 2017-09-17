@@ -26,7 +26,7 @@ $router->group(['prefix' => 'api/'], function ($router) {
     $router->get('/ektp','KtpController@index');
     $router->get('/ektp/created','KtpController@KtpCreated');
     $router->post('/ektp',['uses'=>'KtpController@create','middleware'=>'auth']);
-    $router->get('/ektp/{nik}',['uses'=>'KtpController@show','middleware'=>'auth']);
+    $router->get('/ektp/{kecamatan}/{date}',['uses'=>'KtpController@show','middleware'=>'auth']);
     $router->post('/ektp/{id}/delete',['uses'=>'KtpController@destroy','middleware'=>'auth']);
 
     $router->get('/kecamatan','KecamatanController@index');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ktp;
+use App\Model\Kecamatan;
 use Illuminate\Http\Request;
 
 class KtpController extends Controller
@@ -24,17 +25,18 @@ class KtpController extends Controller
     public function create(Request $request)
     {
         $this->validate($request, [
-            'nik' => 'required|unique:ktps',
-            'kecamatan' => 'required'
+            'total' => 'required|numeric',
+            'date_submission' => 'required',
+            'notes_create'=>'required|min:5'
         ]);
 
 
         $createData = Ktp::create([
-            'nik'           => $request->input('nik'),
-            'kecamatan_id'  => $request->input('kecamatan'),
-            'notes'         => $request->input('notes'),
-            'submission'    => $request->input('submission'),
-            'user_id'       => \Auth::user()->id,
+            'total'               => $request->input('total'),
+            'kecamatan_id'        => \Auth::user()->kecamatan_id,
+            'notes_create'        => $request->input('notes_create'),
+            'date_submission'     => $request->input('date_submission'),
+            'user_id'             => \Auth::user()->id,
         ]);
 
         if ($createData) {
@@ -46,9 +48,11 @@ class KtpController extends Controller
 
     }
 
-    public function show($nik)
-    {
-            $data = Ktp::where('nik',$nik)->with('user');
+    public function show($kecamatan,$date)
+    {   
+            //$kecamatan
+            $data = Ktp::where('kecamatan_id',$kecamatan)
+                    ->where('date_submission',$date)->with('user');
             if($data) {
                $result= $data->with('kecamatan')->get();
                $jumlah = count($result);

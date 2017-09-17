@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ktp extends Model
 {
     protected $fillable = [
-        'nik','notes','kecamatan_id','user_id','submission'
+        'notes_create','notes_update','kecamatan_id','user_id','date_submission','total'
     ];
 
 

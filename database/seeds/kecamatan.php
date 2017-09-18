@@ -213,7 +213,7 @@ class kecamatan extends Seeder
             'updated_at'    => Carbon::now()
         ]);
         DB::table('kecamatans')->insert([
-            'name' => 'TenTenjolaya⁠⁠⁠⁠jo',
+            'name' => 'Tenjolaya⁠⁠⁠⁠',
             'created_at' => Carbon::now(),
             'updated_at'    => Carbon::now()
         ]);

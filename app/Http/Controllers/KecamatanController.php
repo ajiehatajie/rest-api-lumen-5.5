@@ -10,7 +10,7 @@ class KecamatanController extends Controller
 
     public function index()
     {
-        $data = Kecamatan::paginate(20);
+        $data = Kecamatan::paginate(50);
         return $this->listResponse($data);
     }
 
@@ -24,12 +24,12 @@ class KecamatanController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:kecamatans'
-           
+
         ]);
 
         $createData = Kecamatan::create([
             'name'           => $request->input('name'),
-            
+
         ]);
 
         if ($createData) {
@@ -41,28 +41,28 @@ class KecamatanController extends Controller
 
     }
 
-    public function show($id) 
+    public function show($id)
     {
             $data = Kecamatan::find($id);
 
             if($data) {
                 return $this->showResponse($data);
-                
+
             }
             return $this->notFoundResponse();
-    }   
+    }
 
-    public function destroy($id) 
+    public function destroy($id)
     {
             $data = Kecamatan::find($id);
 
             if($data) {
                 $data->delete();
                 return $this->deletedResponse();
-                
+
             }
             return $this->notFoundResponse();
-    }   
+    }
 
 
     protected function showResponse($data)

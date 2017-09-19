@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class UsersController extends Controller
 {
 
-   
+
     public function index()
     {
         $data = User::paginate(20);
@@ -16,20 +16,22 @@ class UsersController extends Controller
     }
 
     public function create(Request $request)
-    {  
+    {
         $hasher = app()->make('hash');
-        
+
         $this->validate($request, [
             'email'         => 'required|email|unique:users',
             'kecamatan_id'  => 'required',
-            'password'      => 'required|min:3'
+            'password'      => 'required|min:5',
+            'name'          => 'required|min:5'
         ]);
 
-        
+
         $createData = User::create([
             'email'           => $request->input('email'),
             'password'        => $hasher->make($request->input('password')),
             'kecamatan_id'    => $request->input('kecamatan_id'),
+            'name'            => $request->input('name'),
             'roles'           => 'admin'
         ]);
 
@@ -44,19 +46,19 @@ class UsersController extends Controller
 
     public function get_user(Request $request, $id)
     {
-       
+
 
         $user = User::where('id', $id)->get();
-        
+
         if ($user) {
               $res['success'] = true;
               $res['message'] = $user;
-        
+
               return response($user);
         }else{
           $res['success'] = false;
           $res['message'] = 'Cannot find user!';
-        
+
           return response($res);
         }
     }

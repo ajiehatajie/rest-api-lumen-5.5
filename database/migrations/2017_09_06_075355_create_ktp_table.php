@@ -39,6 +39,7 @@ class CreateKtpTable extends Migration
             //$table->engine = 'MyISAM';
             $table->increments('id');
             $table->string('email')->unique();
+            $table->string('name')->unique();
             $table->integer('kecamatan_id')->unsigned();
             $table->string('password');
             $table->string('api_token');

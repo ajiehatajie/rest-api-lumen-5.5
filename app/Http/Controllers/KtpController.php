@@ -115,13 +115,15 @@ class KtpController extends Controller
     public function show(Request $request,$kecamatan,$date)
     {
             $req = $request->all();
+           
+           /*
             $log = array('manufacturer' => $req['manufacturer'],
             'devicename'        => $req['devicename'],
             'brand'             => $req['brand'],
             'deviceid'          => $req['deviceid'],
             'os'                => $req['os']
             );
-
+            */
             #$this->LogSave($log);
 
             $id = kecamatan::where('name',urldecode($kecamatan))->first();

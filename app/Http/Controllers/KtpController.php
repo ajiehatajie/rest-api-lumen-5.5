@@ -112,7 +112,7 @@ class KtpController extends Controller
 
     }
 
-    public function show($kecamatan,$date)
+    public function show(Request $request,$kecamatan,$date)
     {
             $req = $request->all();
             $log = array('manufacturer' => $req['manufacturer'],

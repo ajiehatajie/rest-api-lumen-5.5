@@ -27,6 +27,8 @@ $router->group(['prefix' => 'api/'], function ($router) {
     $router->get('/ektp/created','KtpController@KtpCreated');
     $router->post('/ektp',['uses'=>'KtpController@create','middleware'=>'auth']);
     $router->get('/ektp/{kecamatan}/{date}',['uses'=>'KtpController@show']);
+    $router->post('/ektp/{date}/update',['uses'=>'KtpController@update']);
+    
     $router->post('/ektp/{id}/delete',['uses'=>'KtpController@destroy','middleware'=>'auth']);
 
     $router->get('/kecamatan','KecamatanController@index');
@@ -39,5 +41,8 @@ $router->group(['prefix' => 'api/'], function ($router) {
 });
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    $record = app()->geoip->getLocation();
+
+    return $record['ip'];
+    //return $router->app->version();
 });

@@ -26,10 +26,12 @@ class CreateKtpTable extends Migration
             $table->increments('id');
             $table->integer('kecamatan_id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->integer('update_by')->unsigned();
             $table->integer('total');
+            $table->integer('total_update');
             $table->text('notes_create');
             $table->text('notes_update');
-            $table->date('date_submission')->unique();//pengajuan buat nya
+            $table->date('date_submission');//pengajuan buat nya
             $table->boolean('status')->default(0);
             $table->timestamps();
             $table->index('date_submission','kecamatan_id');

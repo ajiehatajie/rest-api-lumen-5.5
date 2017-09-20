@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
+
 use Carbon\Carbon;
 //use DB;
 class kecamatan extends Seeder
@@ -218,8 +220,17 @@ class kecamatan extends Seeder
             'updated_at'    => Carbon::now()
         ]);
 
-
         
+
+        DB::table('users')->insert([
+            'email'=>'hatajie@gmail.com',
+            'name'=>'Ajie Hatajie',
+            'password'=> Hash::make('Ektp2017'),
+            'kecamatan_id' => 1,
+            'roles'=> 'admin',
+            'created_at' => Carbon::now(),
+            'updated_at'    => Carbon::now()
+        ]);
 
     }
 }

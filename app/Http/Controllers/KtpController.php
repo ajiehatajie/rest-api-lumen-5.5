@@ -30,13 +30,13 @@ class KtpController extends Controller
             'date_submission' => 'required',
             'notes'=>'required|min:15'
         ]);
-        
+
         $id_user         = \Auth::user()->id;
         $kecamatan_id    = \Auth::user()->kecamatan_id;
 
         $data = Ktp::where('kecamatan_id',$kecamatan_id)
                 ->where('date_submission',$request->input('date_submission'))->get();
-        
+
         if(count($data) == 0 ) {
             #data belum ada baru input
             $createData = Ktp::create([
@@ -46,7 +46,7 @@ class KtpController extends Controller
                 'date_submission'     => $request->input('date_submission'),
                 'user_id'             => \Auth::user()->id,
             ]);
-    
+
             if ($createData) {
                return $this->createdResponse($createData);
             }else{
@@ -57,12 +57,12 @@ class KtpController extends Controller
             $data = ['message'=> 'data has been duplicate',] ;
             return $this->clientErrorResponse($data);
         }
-       
+
 
 
     }
 
-    public function update(Request $request,$date_submission) 
+    public function update(Request $request,$date_submission)
     {
         //dd($date_submission);
         $this->validate($request, [
@@ -75,7 +75,7 @@ class KtpController extends Controller
 
         $data = Ktp::where('kecamatan_id',$kecamatan_id)
                  ->where('date_submission',$date_submission)->first();
-        
+
         #dd(count($data));
 
         if(count($data) > 0) {
@@ -86,10 +86,10 @@ class KtpController extends Controller
             $data->total_update = $request->input('total');
             $data->save();
 
-            return $this->createdResponse($data); 
+            return $this->createdResponse($data);
 
         } else {
-            #input data baru 
+            #input data baru
             $createData = Ktp::create([
                 'total'               => $request->input('total'),
                 'total_update'        => $request->input('total'),
@@ -101,7 +101,7 @@ class KtpController extends Controller
                 'update_by'           => $id_user,
                 'status'              => 1 //status ektp sudah jadi
             ]);
-    
+
             if ($createData) {
                return $this->createdResponse($createData);
             }else{
@@ -112,8 +112,8 @@ class KtpController extends Controller
 
     }
 
-    public function show(Request $request,$kecamatan,$date)
-    {       
+    public function show($kecamatan,$date)
+    {
             $req = $request->all();
             $log = array('manufacturer' => $req['manufacturer'],
             'devicename'        => $req['devicename'],
@@ -122,8 +122,8 @@ class KtpController extends Controller
             'os'                => $req['os']
             );
 
-            $this->LogSave($log);
-            
+            #$this->LogSave($log);
+
             $id = kecamatan::where('name',urldecode($kecamatan))->first();
             //dd($id->id);
 
@@ -142,8 +142,8 @@ class KtpController extends Controller
                }
                  return $this->notFoundResponse();
             }
-            
-           
+
+
 
 
     }
@@ -224,7 +224,7 @@ class KtpController extends Controller
     }
 
     protected function LogSave($data) {
-        
+
         $record = app()->geoip->getLocation();
         Log::info('succes log: '.$data['brand']);
         $logsave = new Visitor();
@@ -237,9 +237,9 @@ class KtpController extends Controller
         $logsave->deviceid  = $data['deviceid'];
         $logsave->os =$data['os'];
         $logsave->save();
-        
-       
-       
+
+
+
 
     }
 

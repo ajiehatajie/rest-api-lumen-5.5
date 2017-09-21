@@ -220,7 +220,7 @@ class kecamatan extends Seeder
             'updated_at'    => Carbon::now()
         ]);
 
-        
+
 
         DB::table('users')->insert([
             'email'=>'hatajie@gmail.com',
@@ -228,6 +228,30 @@ class kecamatan extends Seeder
             'password'=> Hash::make('Ektp2017'),
             'kecamatan_id' => 1,
             'roles'=> 'admin',
+            'status' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at'    => Carbon::now()
+        ]);
+
+        DB::table('ads')->insert([
+            'adsid' => 'ca-app-pub-9710885788749277/3744651312',
+            'type'  => 'BANNER',
+            'desc'  => 'ANDROID',
+            'created_at' => Carbon::now(),
+            'updated_at'    => Carbon::now()
+        ]);
+        DB::table('ads')->insert([
+            'adsid' => 'ca-app-pub-9710885788749277/7320407586',
+            'type'  => 'BANNER',
+            'desc'  => 'ANDROID Banner 2',
+            'created_at' => Carbon::now(),
+            'updated_at'    => Carbon::now()
+        ]);
+
+        DB::table('ads')->insert([
+            'adsid' => 'ca-app-pub-9710885788749277/2063193549',
+            'type'  => 'VIDEO',
+            'desc'  => 'ANDROID Video Rewards',
             'created_at' => Carbon::now(),
             'updated_at'    => Carbon::now()
         ]);

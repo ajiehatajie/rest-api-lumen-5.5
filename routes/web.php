@@ -23,12 +23,13 @@ $router->group(['prefix' => 'api/'], function ($router) {
     $router->get('/users','UsersController@index');
     $router->post('/users',['uses'=>'UsersController@create']);
 
+    $router->get('/ads','AdsController@index');
     $router->get('/ektp','KtpController@index');
     $router->get('/ektp/created','KtpController@KtpCreated');
     $router->post('/ektp',['uses'=>'KtpController@create','middleware'=>'auth']);
     $router->get('/ektp/{kecamatan}/{date}',['uses'=>'KtpController@show']);
     $router->post('/ektp/{date}/update',['uses'=>'KtpController@update','middleware'=>'auth']);
-    
+
     $router->post('/ektp/{id}/delete',['uses'=>'KtpController@destroy','middleware'=>'auth']);
 
     $router->get('/kecamatan','KecamatanController@index');

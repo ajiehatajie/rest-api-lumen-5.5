@@ -224,7 +224,7 @@ class KtpController extends Controller
     }
 
     protected function LogSave($data) {
-        $record = app()->geoip->getLocation();
+        //$record = app()->geoip->getLocation();
         Log::info('succes log: '.$data['brand']);
         $logsave = new Visitor();
         $logsave->ip = $data['ip'];

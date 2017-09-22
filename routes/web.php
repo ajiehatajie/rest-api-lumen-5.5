@@ -10,7 +10,7 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-
+use Illuminate\Http\Request;
 $router->group(['prefix' => 'api/'], function ($router) {
 
     $router->get('/key', function() {
@@ -44,6 +44,8 @@ $router->group(['prefix' => 'api/'], function ($router) {
 $router->get('/', function () use ($router) {
     $record = app()->geoip->getLocation();
 
-    return $record['ip'];
-    //return $router->app->version();
+    $req = $request->all();
+    
+    //return $req;
+    return $router->app->version();
 });

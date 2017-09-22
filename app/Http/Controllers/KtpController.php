@@ -115,10 +115,7 @@ class KtpController extends Controller
     public function show(Request $request,$kecamatan,$date)
     {
             $req = $request->all();
-            $ip = $request->ip();
-            //print($input);
-        
-            //dd($req['ip']);
+            $ip  = $request->ip();
             $log = array('manufacturer' => $req['manufacturer'],
             'devicename'        => $req['devicename'],
             'brand'             => $req['brand'],
@@ -127,13 +124,11 @@ class KtpController extends Controller
             'ip'                => $ip
             );
             
-            
+            $this->LogSave($log);
+            Log::info('show ektp by request');
+
 
             $id = kecamatan::where('name',urldecode($kecamatan))->first();
-            //dd($id->id);
-
-            //dd($id);
-            //$kecamatan
             $data = Ktp::where('kecamatan_id',$id->id)
                     ->where('date_submission',$date)
                     ->with('user');
@@ -148,9 +143,7 @@ class KtpController extends Controller
                  return $this->notFoundResponse();
             }
 
-            $this->LogSave($log);
-            Log::info('show ektp by request');
-
+           
 
 
     }
@@ -231,13 +224,12 @@ class KtpController extends Controller
     }
 
     protected function LogSave($data) {
-
         $record = app()->geoip->getLocation();
         Log::info('succes log: '.$data['brand']);
         $logsave = new Visitor();
         $logsave->ip = $data['ip'];
-        $logsave->iso= null;
-        $logsave->country = null;
+        $logsave->iso= 'ID';
+        $logsave->country = 'INDONESIA';
         $logsave->manufacturer=$data['manufacturer'];
         $logsave->devicename = $data['devicename'];
         $logsave->brand      = $data['brand'];

@@ -225,7 +225,7 @@ class kecamatan extends Seeder
         DB::table('users')->insert([
             'email'=>'hatajie@gmail.com',
             'name'=>'Ajie Hatajie',
-            'password'=> Hash::make('Ektp2017'),
+            'password'=> Hash::make('Ektp2017*('),
             'kecamatan_id' => 1,
             'roles'=> 'admin',
             'status' => 1,

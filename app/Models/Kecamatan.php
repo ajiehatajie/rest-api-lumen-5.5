@@ -15,4 +15,8 @@ class Kecamatan extends Model
     public function ktp(){
         return $this->hasMany('App\Models\Ktp');        
     }
+
+    public function user() {
+        return $this->hasMany('App\User');
+    }
 }

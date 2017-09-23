@@ -42,9 +42,12 @@ class KecamatanController extends Controller
     }
 
     public function show($id)
-    {
-            $data = Kecamatan::find($id);
+    {       
+            $kecamatan = urldecode($id);
+            $data = Kecamatan::where('name',$kecamatan)->with('user')->get();
 
+            //dd($data);
+            
             if($data) {
                 return $this->showResponse($data);
 
